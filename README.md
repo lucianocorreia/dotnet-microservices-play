@@ -17,10 +17,8 @@ To get started with the project, follow these steps:
 
 The project is composed of the following microservices:
 
-- **Authentication Service**: Handles user authentication and authorization.
-- **Product Service**: Provides information about products.
-- **Order Service**: Handles orders and payments.
-- **Shipping Service**: Handles shipping and delivery.
+- **Catalog Service**: Provides information about the catalog.
+
 
 Each microservice is implemented as a separate .NET Core application, and communicates with the other microservices using REST APIs.
 
