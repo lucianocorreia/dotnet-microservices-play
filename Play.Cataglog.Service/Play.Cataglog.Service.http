@@ -1,0 +1,6 @@
+@Play.Cataglog.Service_HostAddress = http://localhost:5087
+
+GET {{Play.Cataglog.Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
