@@ -24,7 +24,7 @@ Each microservice is implemented as a separate .NET Core application, and commun
 ## Commands
 
 * MongoDB: 
-  * docker run --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
+  * docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
 * Nuget Package Source
   * dotnet nuget add source /Path/Play/packages/ -n PlayMicroservices    
 
