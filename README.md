@@ -19,8 +19,14 @@ The project is composed of the following microservices:
 
 - **Catalog Service**: Provides information about the catalog.
 
-
 Each microservice is implemented as a separate .NET Core application, and communicates with the other microservices using REST APIs.
+
+## Commands
+
+* MongoDB: 
+  * docker run --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
+* Nuget Package Source
+  * dotnet nuget add source /Path/Play/packages/ -n PlayMicroservices    
 
 ## Contributing
 
