@@ -24,9 +24,19 @@ builder.Services.AddHttpClient<CatalogClient>(client =>
     onRetry: (response, timespan, retryCount, context) =>
     {
         // TODO: Log using Ilogger
-        var msg = $"Retry {retryCount} for {context.PolicyKey} at {context.OperationKey}, due to: {response.Result.StatusCode}";
+        var msg = $"==>> Retry {retryCount} for {context?.PolicyKey} at {context?.OperationKey}, due to: {response?.Result?.StatusCode}";
         Console.WriteLine(msg);
     }
+))
+.AddTransientHttpErrorPolicy(builder => builder.Or<TimeoutRejectedException>().CircuitBreakerAsync(
+    3,
+    TimeSpan.FromSeconds(15),
+    onBreak: (outcome, timespan) =>
+    {
+        var msg = $"==>> Circuit breaker opened for {timespan.TotalSeconds} seconds due to: {outcome.Exception?.Message ?? outcome.Result.StatusCode.ToString()}";
+        Console.WriteLine(msg);
+    },
+    onReset: () => Console.WriteLine("==>> Circuit breaker reset")
 ))
 .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(1)));
 
