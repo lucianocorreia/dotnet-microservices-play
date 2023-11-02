@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Play.Common.Settings;
 
-namespace Play.Common.Extensions;
+namespace Play.Common.MassTransit;
 
 public static class Extensions
 {
