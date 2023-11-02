@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using Play.Catalog.Service.Entities;
-using Play.Catalog.Settings;
+using Play.Common.Extensions;
 using Play.Common.MongoDB;
 using Play.Common.Settings;
 
@@ -12,28 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMongo()
-    .AddMongoRepository<Item>("items");
-
-#region RabbitMW configuration
-builder.Services.AddMassTransit(config =>
-{
-    config.UsingRabbitMq((ctx, cfg) =>
-    {
-        var rabbitMQSettings = builder.Configuration.GetSection(nameof(RabbitMQSettings)).Get<RabbitMQSettings>();
-        var serviceSettings = builder.Configuration.GetSection("ServiceSettings").Get<ServiceSettings>();
-
-        cfg.Host(rabbitMQSettings!.Host);
-        cfg.ConfigureEndpoints(ctx, new KebabCaseEndpointNameFormatter(serviceSettings!.ServiceName, false));
-    });
-
-});
-builder.Services.Configure<MassTransitHostOptions>(options =>
-{
-    options.WaitUntilStarted = true;
-    options.StartTimeout = TimeSpan.FromSeconds(30);
-    options.StopTimeout = TimeSpan.FromMinutes(1);
-});
-#endregion
+    .AddMongoRepository<Item>("items")
+    .AddMassTransitWithRabbitMQ();
 
 builder.Services.AddControllers(options =>
 {
