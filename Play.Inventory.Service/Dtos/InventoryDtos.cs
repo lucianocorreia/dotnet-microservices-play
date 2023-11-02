@@ -1,6 +1,6 @@
 namespace Play.Inventory.Service.Dtos;
 
-public record GrantItemsSto(
+public record GrantItemsDto(
     Guid UserId,
     Guid CatalogItemId,
     int Quantity
