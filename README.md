@@ -17,7 +17,11 @@ To get started with the project, follow these steps:
 
 The project is composed of the following microservices:
 
+- **Infra**: Shared infrastructure for the microservices.
+- **Common**: Shared configuration.
+- **Catalog Contracts**: RabbitMQ contracts for the catalog service.
 - **Catalog Service**: Provides information about the catalog.
+- **Inventory Service**: Provides information about the inventory.
 
 Each microservice is implemented as a separate .NET Core application, and communicates with the other microservices using REST APIs.
 
